@@ -9,18 +9,25 @@
             <tr>
                 <th>Nombre</th>
                 <th>Teléfono</th>
+                <th>Categoria</th>
             </tr>
             @foreach($contactos as $contacto)
             <tr>
                 <td>{{ $contacto->nombre }}</td>
                 <td>{{ $contacto->telefono }}</td>
                 <td>
+                    @if ($categorias[$contacto->id]!=null)
+                    <p>{{ $categorias[$contacto->id] }}</p>
+                    @else
+                    <p>No hay categorias añadidas</p>
+                    @endif
+                </td>
+                <td>
                     <form method="get" action="{{ route('edit',$contacto->id) }}"><input type="submit" value="Actualizar"></form>
                 </td>
                 <td>
-                    <form method="get" action="{{ route('userCategories',$contacto->id) }}"><input type="submit" value="Añadir/Editar categoria"></form>
+                    <form method="get" action="{{ route('contactCategories',$contacto->id) }}"><input type="submit" value="Añadir/Editar categoria"></form>
                 </td>
-
                 <td>
                     <form action="{{ route('delete',$contacto->id )}}" method="post">
                         @csrf
@@ -28,14 +35,16 @@
                         <input type="submit" value="Eliminar">
                     </form>
                 </td>
-                
+
             </tr>
             @endforeach
         </table><br>
 
         <form action="{{ url('/index/createCategory') }}">
-            @csrf
             <input type="submit" value="Crear categoria">
+        </form>
+        <form action="{{ url('/index/userCategories') }}">
+            <input type="submit" value="Categorias">
         </form>
         <form method="post" action="{{ route('logout') }}">
             @csrf

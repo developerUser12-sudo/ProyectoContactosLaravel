@@ -1,5 +1,5 @@
 <h1>Categorias</h1>
-<form action="{{ url('/index/addCategory') }}" method="post">
+<form action="{{ route('addCategory',$contacto->id) }}" method="post">
     @csrf
     @if (count($categorias)>0)
     <select name="categoria" id="">

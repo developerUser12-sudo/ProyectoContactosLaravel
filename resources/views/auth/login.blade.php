@@ -1,4 +1,3 @@
-<x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -34,4 +33,3 @@
     <form action="{{ route('register') }}">
         <input type="submit" value="Crear cuenta">
     </form>
-</x-guest-layout>

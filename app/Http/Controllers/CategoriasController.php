@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorias;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Categorias;
+use App\Models\Contactos;
 use Illuminate\Support\Facades\Auth;
+
 class CategoriasController extends Controller
 {
-    public function mostrarCategorias($id)
+    public function mostrarCategorias()
     {
-        $categorias = Categorias::where('id_usuario', Auth::user()->id)->where('id_contacto',$id)->get();
-        return view('añadirCategorias', compact('categorias'));
+        $categorias = Categorias::where('id_usuario', Auth::id())->get();
+        return view('categorias', compact('categorias'));
     }
 }

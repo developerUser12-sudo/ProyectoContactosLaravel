@@ -11,13 +11,15 @@ class AsignarCategoriaContactosController extends Controller
 {
     public function addCategory(Request $request,$id)
     {
-        
-        ContactosCategorias::create([
+       $categoria=ContactosCategorias::where('id_usuario',Auth::id())->where('id_contacto',$id)->first();
+       if ($categoria) {
+        $categoria->delete();
+       } 
+       ContactosCategorias::create([
             'id_categoria' => $request->categoria,
             'id_usuario' => Auth::id(),
             'id_contacto' => $id
         ]);
-
         return redirect()->route('dashboard');
     }
 }
